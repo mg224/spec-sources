@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function OutputItem({ id, name, email }) {
   return (
@@ -8,5 +8,5 @@ export default function OutputItem({ id, name, email }) {
       <div class="output-email">{email}</div>
       <button class="delete-btn">DELETE</button>
     </div>
-  )
-}
+  );
+};

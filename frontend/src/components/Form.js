@@ -1,5 +1,5 @@
-import React from 'react'
-import OutputItem from './OutputItem'
+import React from 'react';
+import OutputItem from './OutputItem';
 
 export default function Form() {
   return (
@@ -40,5 +40,5 @@ export default function Form() {
         />
       </div>
     </>
-  )
-}
+  );
+};
