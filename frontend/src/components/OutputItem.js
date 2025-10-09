@@ -1,12 +1,15 @@
-import React from 'react';
-
-export default function OutputItem({ id, name, email }) {
+export default function OutputItem({ id, name, email, deleteItem }) {
   return (
-    <div class="output-item">
-      <div class="output-text">{id}</div>
-      <div class="output-text">{name}</div>
-      <div class="output-email">{email}</div>
-      <button class="delete-btn">DELETE</button>
+    <div className="output-item">
+      <div className="output-text">{id}</div>
+      <div className="output-text">{name}</div>
+      <div className="output-email">{email}</div>
+      <button 
+        onClick={() => deleteItem(id)}
+        className="delete-btn"
+      >
+        DELETE
+      </button>
     </div>
   );
 };
