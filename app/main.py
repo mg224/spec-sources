@@ -21,12 +21,15 @@ def get_db():
    finally:
        db.close()
 
-
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the FastAPI app!"}
+    return {
+        "message": "Welcome to the FastAPI app!"
+    }
 
 @app.get("/health/db/users")
 def health_db_users(db: Session = Depends(get_db)):
    count = db.execute(text("SELECT COUNT(*) FROM specsources")).scalar_one()
-   return {"count": int(count)}
+   return {
+       "count": int(count)
+    }
