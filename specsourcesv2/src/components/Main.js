@@ -1,49 +1,64 @@
-import { useState } from 'react';
-import OutputItem from './OutputItem';
+import { useEffect, useState } from 'react';
+import OutputItem from './Source';
+import axios from 'axios';
 
 export default function Main() {
-  const [items, setItems] = useState([]);
+  const [sources, setSources] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const addItem = (e) => {
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/sources`)
+      .then((response) => {
+        // console.log(response);
+        setSources(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+  }, [sources]);
+
+  const addSource = (e) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) {
       return;
     }
 
-    const newItem = {
-      id: items.length + 1,
+    const newSource = {
       name: name,
       email: email
     };
 
-    setItems((prev) => [...prev, newItem]);
+    axios.post(`${process.env.REACT_APP_API_URL}/sources`, newSource);
+
+    // setSources((prev) => [...prev, newSource]);
 
     setName("");
     setEmail("");
     return;
   };
 
-  const deleteItem = (id) => {
-    setItems(items.filter((i) => i.id !== id));
+  const deleteSource = (id) => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/sources/${id}`);
+    // setSources(sources.filter((i) => i.id !== id));
   };
 
   return (
     <>
       <div>
         <div>
-          <h1 class="title">Spectator's Sources</h1>
+          <h1 className="title">Spectator's Sources</h1>
         </div>
 
-        <form action="" className="form" onSubmit={addItem}>
-          <div class="input-div">
-            <label forName="name" className="input-label">
+        <form action="" className="form" onSubmit={addSource}>
+          <div className="input-div">
+            <label htmlFor="name" className="input-label">
               Source Name:
               <input 
                 type="text" 
                 id="name" 
-                name="name" 
+                forName="name" 
                 className="input-item" 
                 onChange={(e) => setName(e.target.value)} 
                 value={name} 
@@ -70,16 +85,17 @@ export default function Main() {
       </div>
 
       <div className="output-list">
-        {items.length ? 
-          items.map((i) => (
-          <OutputItem 
-            id={i.id}
-            name={i.name}
-            email={i.email}
-            deleteItem={deleteItem}
-          />
+        {sources.length ? 
+          sources.map((i) => (
+            <OutputItem 
+              key={i.id}
+              id={i.id}
+              name={i.name}
+              email={i.email}
+              deleteSource={deleteSource}
+            />
           ))
-        :
+          :
           <p></p>
         }
       </div>

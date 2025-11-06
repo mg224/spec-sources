@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Navbar() {
   return (
-    <header class="header">
-      <img src="SpectatorLogo.png" alt="Spectator Logo" class="logo" />
+    <header className="header">
+      <img src="SpectatorLogo.png" alt="Spectator Logo" className="logo" />
     </header>
   );
 };
