@@ -17,7 +17,7 @@ export default function Main() {
         console.error(error);
       });
 
-  }, [sources]);
+  }, []);
 
   const addSource = (e) => {
     e.preventDefault();
@@ -30,9 +30,17 @@ export default function Main() {
       email: email
     };
 
-    axios.post(`${process.env.REACT_APP_API_URL}/sources`, newSource);
-
-    // setSources((prev) => [...prev, newSource]);
+    axios.post(`${process.env.REACT_APP_API_URL}/sources`, newSource)
+      .then((response) => {
+        setSources((prev) => [...prev, {
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email
+        }]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     setName("");
     setEmail("");
@@ -40,8 +48,8 @@ export default function Main() {
   };
 
   const deleteSource = (id) => {
+    setSources(sources.filter((i) => i.id !== id));
     axios.delete(`${process.env.REACT_APP_API_URL}/sources/${id}`);
-    // setSources(sources.filter((i) => i.id !== id));
   };
 
   return (
