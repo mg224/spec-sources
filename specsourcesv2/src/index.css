@@ -70,6 +70,19 @@ body {
     cursor: pointer;
 }
 
+.edit-btn {
+    background-color: #f4a40f;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 8px 16px;
+    width: 166px;
+    height: 57px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 .delete-btn {
     background-color: #FF7676;
     color: white;
@@ -103,6 +116,12 @@ body {
     font-size: 25px;
     text-align: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.251);
+}
+
+.output-item-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 8px;
 }
 
 .output-text {
