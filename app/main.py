@@ -13,7 +13,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],                 
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -77,7 +77,11 @@ async def add_db_source(source: SpecSourceBase, db: Session = Depends(get_db)):
     )
 
     fm = FastMail(conf)
-    await fm.send_message(message)
+    try:
+        await fm.send_message(message)
+    except:
+        print("Failed to send email.")
+
     return db_source
 
 # @app.put("/sources/{source_id}")
