@@ -10,7 +10,7 @@ CREATE TABLE SpectatorSources (
 """
 
 class SpecSource(Base):
-    __tablename__ = "specsources"
+    __tablename__ = "SpectatorSources"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)    
