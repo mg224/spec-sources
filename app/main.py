@@ -56,7 +56,7 @@ def read_root():
 
 @app.get("/health/db/users")
 def health_db_users(db: Session = Depends(get_db)):
-   count = db.execute(text("SELECT COUNT(*) FROM specsources")).scalar_one()
+   count = db.execute(text("SELECT COUNT(*) FROM SpectatorSources")).scalar_one()
    return {
        "count": int(count)
     }
